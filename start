@@ -1,0 +1,1 @@
+sudo docker run --link dogstatsd:dogstatsd -p 51020:51020/udp -d juniper/junos-statsd /sbin/my_init
