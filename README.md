@@ -30,12 +30,12 @@ Because container are lightweight and flexible there are multiple possible deplo
 
 The Juniper container is running Fluentd with 2 specifics plugins
 - **Input plugin** developed for this project that accept JSON over UDP send by QFX5100
-- **Output Plugin** to send Statsd format inspired from [add link]()
+- **Output Plugin** to send Statsd format inspired from [https://github.com/fakechris/fluent-plugin-statsd](https://github.com/fakechris/fluent-plugin-statsd)
 
 # Installation Guide
 ### How to configure Juniper devices
 
-A configuration example is provided for QFX5100 inside [juniper_templates directory]()
+A configuration example is provided for QFX5100 inside [juniper_templates directory](https://github.com/JNPRAutomate/docker-junos-datadog/tree/master/juniper_templates)
 
 ### Create the Juniper container running Fluentd
 ```
