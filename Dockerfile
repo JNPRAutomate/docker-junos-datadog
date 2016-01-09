@@ -15,7 +15,6 @@ RUN     apt-get -y --force-yes install \
 
 RUN     gem install fluentd statsd-ruby --no-ri --no-rdoc && \
         gem install dogstatsd-ruby
-# RUN     fluent-gem install fluent-plugin-statsd
 
 RUN     mkdir /etc/fluent && \
         mkdir /etc/fluent/plugin
