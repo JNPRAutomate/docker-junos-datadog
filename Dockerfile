@@ -13,7 +13,7 @@ RUN     apt-get -y --force-yes install \
 ### Install Fluentd  ###
 ########################
 
-RUN     gem install fluentd statsd-ruby rake --no-ri --no-rdoc && \
+RUN     gem install fluentd statsd-ruby rake bundler --no-ri --no-rdoc && \
         gem install dogstatsd-ruby
 
 RUN     mkdir /etc/fluent && \
