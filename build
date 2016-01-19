@@ -1,1 +1,1 @@
-sudo docker build -t juniper/junos-statsd .
+docker build -t juniper/junos-dogstatsd .
