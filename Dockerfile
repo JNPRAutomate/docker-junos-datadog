@@ -7,13 +7,13 @@ RUN     apt-get -y update && \
 # dependencies
 RUN     apt-get -y --force-yes install \
         git adduser libfontconfig wget ruby ruby-dev make curl \
-        build-essential python-dev tcpdump
+        build-essential tcpdump
 
 ########################
 ### Install Fluentd  ###
 ########################
 
-RUN     gem install fluentd statsd-ruby --no-ri --no-rdoc && \
+RUN     gem install fluentd statsd-ruby rake --no-ri --no-rdoc && \
         gem install dogstatsd-ruby
 
 RUN     mkdir /etc/fluent && \
@@ -22,8 +22,12 @@ RUN     mkdir /etc/fluent && \
 ADD     fluentd/fluent.conf /fluent/fluent.conf
 RUN     fluentd --setup ./fluent
 
-ADD     fluentd/parser_juniper_analyticsd.rb    /etc/fluent/plugin/parser_juniper_analyticsd.rb
+## Install plugin
 ADD     fluentd/out_statsd.rb                   /etc/fluent/plugin/out_statsd.rb
+
+RUN     git clone https://github.com/JNPRAutomate/fluent-plugin-juniper-telemetry.git && \
+        cd fluent-plugin-juniper-telemetry && \
+        rake install
 
 ADD     fluentd/fluentd.launcher.sh /etc/service/fluentd/run
 RUN     chmod +x /etc/service/fluentd/run
@@ -31,11 +35,10 @@ RUN     chmod +x /etc/service/fluentd/run
 RUN     apt-get clean && \
         rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-
 ENV HOME /root
 RUN chmod -R 777 /var/log/
 
 ## Fluentd
-EXPOSE 50020
+EXPOSE 51020
 
 CMD ["/sbin/my_init"]
